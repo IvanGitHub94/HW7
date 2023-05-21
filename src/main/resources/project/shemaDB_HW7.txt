@@ -1,0 +1,60 @@
+Table films {
+  id number [primary key]
+  title text
+  premiere_year date
+  country text
+  genre enumerated
+}
+
+Table orders {
+  id number [primary key]
+  user_id number
+  film_id number
+  rentDate date
+  rentPeriod date
+  purchase boolean
+}
+
+Table users {
+  id number [primary key]
+  login text
+  password text
+  first_name text
+  last_name text
+  middle_name text
+  birthDate date
+  phone text
+  address text
+  email text
+  createdWhen date
+  role_id number
+}
+
+Table role {
+  id number [primary key]
+  title text
+  description text
+}
+
+Table filmDirectors {
+  film_id number
+  director_id number
+}
+
+Table directors {
+  id number [primary key]
+  directors_fio text
+  position text
+}
+
+
+
+Ref: "films"."id" < "orders"."film_id"
+
+Ref: "films"."id" < "filmDirectors"."film_id"
+
+Ref: "directors"."id" < "filmDirectors"."director_id"
+
+Ref: "role"."id" < "users"."role_id"
+
+Ref: "users"."id" < "orders"."user_id"
